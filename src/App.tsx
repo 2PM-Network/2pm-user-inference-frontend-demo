@@ -1,12 +1,10 @@
 import React, { useState } from "react";
-import Web3 from "web3";
 import thirdwebIcon from "./2pmp.png";
 import { Account } from './account'
 import { WalletOptions } from './wallet-options'
 import { useAccount, useConnect, useDisconnect, useSignMessage, useSendTransaction } from 'wagmi';
 import { parseEther } from 'viem'
 
-const web3 = new Web3("wss://twilight-wispy-emerald.scroll-testnet.quiknode.pro/1e2ef8ff2af8f6ea6078ed30f1a11e481176b126/");
 
 function ConnectWallet() {
   const { isConnected } = useAccount()
@@ -101,28 +99,6 @@ export function App() {
     }
   };
 
-  const handleSubmit = async () => {
-    if (!signature) {
-      alert("Please sign the transaction first.");
-      return;
-    }
-    try {
-      const response = await fetch("/api/submit", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ data, signature }),
-      });
-      const result = await response.json();
-      setMessage(`Inference result: ${result.inferenceResult}`);
-      alert(`Inference result: ${result.inferenceResult}`);
-    } catch (error) {
-      console.error("Failed to submit data", error);
-      setMessage("Failed to submit data.");
-      alert("Failed to submit data.");
-    }
-  };
 
   return (
     <main className="p-4 pb-10 min-h-[100vh] flex items-center justify-center container max-w-screen-lg mx-auto">
@@ -165,8 +141,9 @@ function Header() {
       <h1 className="text-2xl md:text-6xl font-bold tracking-tighter mb-6 text-zinc-100 mt-10">
         2PM.Network
         <span className="text-zinc-300 inline-block mx-1"> - </span>
-        <span className="inline-block -skew-x-6 text-violet-500"> logistic Regression Demo</span>
+        <span className="text-xl md:text-5xl inline-block -skew-x-6 text-violet-500"> logistic Regression Demo</span>
       </h1>
+
       <p className="text-zinc-300 text-base">Get Started with 2PM.Network</p>
       <Modal />
       {/* <p className="text-zinc-300 text-base">The task involves using the Spector and Mazzeo (1980) Program Effectiveness Data to perform a logistic regression federated learning task. The experimental dataset evaluates the impact of the Personalized System of Instruction (PSI) program on student performance. The key variables include grade improvement, economics test score (TUCE), PSI participation, and grade point average (GPA). The objective is to predict whether a student's grade will improve through participation in the PSI program.</p> */}
