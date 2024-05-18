@@ -46,13 +46,15 @@ export function App() {
       console.log(txResponse)
 
       // Send the signed message and transaction details to your API
-      const response = await fetch('https://2pm-node-api.example.com/submit', {
+      const response = await fetch('http://47.236.156.45:6700/v1/model/predict/20', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({ data, txResponse }),
       });
+
+      console.log(response)
 
       const result = await response.json();
       setMessage(`Inference result: ${result.inferenceResult}`);
@@ -128,7 +130,7 @@ function Header() {
       <h1 className="text-2xl md:text-6xl font-bold tracking-tighter mb-6 text-zinc-100 mt-10">
         2PM.Network
         <span className="text-zinc-300 inline-block mx-1"> - </span>
-        <span className="inline-block -skew-x-6 text-violet-500"> Regression Demo </span>
+        <span className="inline-block -skew-x-6 text-violet-500"> logistic Regression Demo</span>
       </h1>
       <p className="text-zinc-300 text-base">Get Started with 2PM.Network</p>
     </header>
