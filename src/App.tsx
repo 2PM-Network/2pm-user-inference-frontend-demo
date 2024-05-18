@@ -52,9 +52,8 @@ export function App() {
         body: JSON.stringify({ data, txResponse }),
       });
 
-      console.log(response)
-
       const result = await response.json();
+      console.log(result);
       setMessage(`Inference result: ${result.inferenceResult}`);
       alert(`Inference result: ${result.inferenceResult}`);
     } catch (error) {
