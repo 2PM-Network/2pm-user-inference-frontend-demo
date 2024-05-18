@@ -14,6 +14,42 @@ function ConnectWallet() {
   return <WalletOptions />
 }
 
+const Modal: React.FC = () => {
+  const [isOpen, setIsOpen] = useState(false);
+
+  return (
+    <div className="justify-center items-center bg-gray-100 rounded mt-4">
+      <button
+        className="px-4 py-2 bg-blue-500 text-white rounded"
+        onClick={() => setIsOpen(true)}
+      >
+        Show Task Information
+      </button>
+
+      {isOpen && (
+        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
+          <div className="bg-white rounded-lg p-6 max-w-md w-full">
+            <h2 className="text-zinc-800 font-bold mb-4">Task Information</h2>
+            <p className="text-zinc-700 text-base">
+              The task involves using the Spector and Mazzeo (1980) Program Effectiveness Data to perform a logistic regression federated learning task. The experimental dataset evaluates the impact of the Personalized System of Instruction (PSI) program on student performance. The key variables include grade improvement, economics test score (TUCE), PSI participation, and grade point average (GPA). The objective is to predict whether a student's grade will improve through participation in the PSI program.
+            </p>
+            <div className="mt-4 flex justify-end">
+              <button
+                className="px-4 py-2 bg-red-500 text-white rounded"
+                onClick={() => setIsOpen(false)}
+              >
+                Close
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+};
+
+
+
 export function App() {
   const account = useAccount()
   const [data, setData] = useState("");
@@ -97,18 +133,18 @@ export function App() {
         </div>
         <div>
           <textarea
-            placeholder="Enter inference data"
+            placeholder="Enter inference data, e.g.: [3.5, 20, 0]"
             value={data}
             onChange={(e) => setData(e.target.value)}
-            className="w-full p-2 mb-4 border border-gray-300 rounded"
+            className="w-full p-2 mb-4 border border-gray-300 rounded bg-gray-200 text-black"
           ></textarea>
-      <div className="flex justify-center mt-4">
-        <button 
-          onClick={handleSignAndSubmit} 
-          className="px-6 py-2 bg-blue-500 hover:bg-blue-700 text-white font-semibold rounded-lg shadow-md transition duration-300 ease-in-out transform hover:scale-105">
-          Sign Transaction and Submit Data
-        </button>
-      </div>
+          <div className="flex justify-center mt-4">
+            <button
+              onClick={handleSignAndSubmit}
+              className="px-6 py-2 bg-blue-500 hover:bg-blue-700 text-white font-semibold rounded-lg shadow-md transition duration-300 ease-in-out transform hover:scale-105">
+              Sign Transaction and Submit Data
+            </button>
+          </div>
         </div>
       </div>
     </main>
@@ -132,6 +168,8 @@ function Header() {
         <span className="inline-block -skew-x-6 text-violet-500"> logistic Regression Demo</span>
       </h1>
       <p className="text-zinc-300 text-base">Get Started with 2PM.Network</p>
+      <Modal />
+      {/* <p className="text-zinc-300 text-base">The task involves using the Spector and Mazzeo (1980) Program Effectiveness Data to perform a logistic regression federated learning task. The experimental dataset evaluates the impact of the Personalized System of Instruction (PSI) program on student performance. The key variables include grade improvement, economics test score (TUCE), PSI participation, and grade point average (GPA). The objective is to predict whether a student's grade will improve through participation in the PSI program.</p> */}
     </header>
   );
 }

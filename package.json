@@ -14,6 +14,7 @@
     "@web3modal/wagmi": "^4.2.1",
     "ethers": "^6.12.1",
     "react": "^18.2",
+    "react-bootstrap": "^2.10.2",
     "react-dom": "^18.2",
     "thirdweb": "^5",
     "viem": "2.x",
